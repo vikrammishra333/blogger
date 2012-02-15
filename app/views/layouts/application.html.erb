@@ -11,6 +11,8 @@
       <%=  render "layouts/header" %>
       <%= render "layouts/main_menu" %>
       <div class="content">
+        <p class="notice msg"><%= notice %></p>
+        <p class="alert msg"><%= alert %></p>
         <%= yield %>
       </div>
       <%=  render "layouts/footer" %>

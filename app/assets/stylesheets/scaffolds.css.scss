@@ -31,8 +31,12 @@ div {
   &.field, &.actions {
     margin-bottom: 10px; } }
 
-#notice {
+.notice {
   color: green; }
+.alert {
+  color: red; }
+
+
 
 .field_with_errors {
   padding: 2px;
@@ -81,7 +85,7 @@ div {
         list-style-type: none;
         vertical-align:middle;
         a{
-            float: left;
+            
             display: block;
             text-decoration: none;
             margin: 0;

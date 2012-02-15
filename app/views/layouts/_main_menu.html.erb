@@ -1,8 +1,16 @@
 <nav id="main_menu">
   <ul>
-    
+    <li  id="posts" class="menu_item">
+      <%= link_to "Users", root_url %>
+    </li>
+    <li  id="posts" class="menu_item">
+      <%= link_to "Questions", root_url %>
+    </li>
     <li  id="posts" class="menu_item">
       <%= link_to "Posts", root_url %>
+    </li>
+    <li  id="posts" class="menu_item">
+      <%= link_to "Tags", root_url %>
     </li>
     <li id="sign-in" class="menu_item">
       <% if not current_user %>

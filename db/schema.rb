@@ -11,12 +11,62 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215093445) do
+ActiveRecord::Schema.define(:version => 20120215131219) do
+
+  create_table "answers", :force => true do |t|
+    t.text     "answer_content"
+    t.integer  "user_id"
+    t.integer  "guest_id"
+    t.integer  "question_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "guests", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "homepage_url"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "mercury_images", :force => true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "question_tags", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "tag_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "views"
+    t.integer  "user_id"
+    t.integer  "guest_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

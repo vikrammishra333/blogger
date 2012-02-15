@@ -1,6 +1,16 @@
 Blogger::Application.routes.draw do
   
   
+ # Mercury::Engine.routes
+
+  resources :guests
+
+  resources :tags
+
+  resources :answers
+
+  resources :questions
+
   resources :posts
 
   devise_for :users
