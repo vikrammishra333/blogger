@@ -1,0 +1,126 @@
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  width:80%;
+  left:10%;
+  position:relative;
+  border:2px solid black; }
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px; }
+
+a {
+  color: #000;
+  &:visited {
+    color: #666; }
+  &:hover {
+    color: #fff;
+    background-color: #000; } }
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px; } }
+
+#notice {
+  color: green; }
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table; }
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff; }
+  ul li {
+    font-size: 12px;
+    list-style: square; } }
+
+#main_menu
+{
+
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid black; /*bottom horizontal line that runs beneath tabs*/
+    border-top: 1px solid black; /*bottom horizontal line that runs beneath tabs*/
+    text-align:right;
+    ul {
+
+       margin: 0;
+       padding: 0;
+       padding-right: 10px; /*offset of tabs relative to browser left edge*/
+       padding-left: 10px;
+       font: bold 12px Verdana;
+
+       li{
+        display: inline-block;
+        margin: 0;
+        list-style-type: none;
+        vertical-align:middle;
+        a{
+            float: left;
+            display: block;
+            text-decoration: none;
+            margin: 0;
+            padding: 7px 8px; /*padding inside each tab*/
+            border-right: 1px solid white; /*right divider between tabs*/
+            color: white;
+            background: #414141; /*background of tabs (default state)*/
+        }
+        a:visited{
+            color: white;
+        }
+        a:hover{
+            background: gray; /*background of tabs for hover state, plus tab with "selected" class assigned to its LI */
+        }
+      }
+      li.selected a{
+        background: blue;
+      }
+    }
+}
+
+#footer
+{
+    text-align:center;
+}
+
+.inner-content
+{
+    width:70%;
+    border-right:1px solid gray;
+    height:100%;
+    display:inline-block;
+}
+
+.inner-content-right
+{
+    width:30%;
+    left:70%;
+    height:100%;
+    position:absolute;
+    display:inline-block;
+}
