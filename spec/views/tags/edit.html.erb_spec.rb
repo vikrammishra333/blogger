@@ -14,7 +14,7 @@ describe "tags/edit" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => tags_path(@tag), :method => "post" do
       assert_select "input#tag_title", :name => "tag[title]"
-      assert_select "input#tag_description", :name => "tag[description]"
+      assert_select "textarea#tag_description", :name => "tag[description]"
     end
   end
 end

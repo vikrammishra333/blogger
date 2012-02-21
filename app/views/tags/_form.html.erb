@@ -1,23 +1,13 @@
 <%= form_for(@tag) do |f| %>
-  <% if @tag.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
-
-      <ul>
-      <% @tag.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <span class="label_for"><span class="red">*</span><%= f.label :title, "Title:" %></span>
+    <span class="label_field"><%= f.text_field :title %></span>
+    <div class="error_span"><%= "Title"+" "+ @tag.errors.messages[:title][0] if not @tag.errors.messages[:title][0].nil?%></div>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <span class="label_for"><span class="red label_for_desc">*</span><%= f.label :description, "Description:", :class => "label_for_desc" %></span>
+    <span class="label_field"><%= f.text_area :description, :rows => "2", :cols => "39" %></span>
+    <div class="error_span label_for_desc"><%= "Description"+" "+ @tag.errors.messages[:description][0] if not @tag.errors.messages[:description][0].nil?%></div>
   </div>
   <div class="actions">
     <%= f.submit %>

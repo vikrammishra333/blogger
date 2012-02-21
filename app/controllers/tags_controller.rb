@@ -1,4 +1,11 @@
 class TagsController < ApplicationController
+  include TagsHelper
+
+  before_filter :include_tag
+
+  def include_tag
+    @tag_head =  header_tag
+  end
   # GET /tags
   # GET /tags.json
   def index
@@ -25,7 +32,7 @@ class TagsController < ApplicationController
   # GET /tags/new.json
   def new
     @tag = Tag.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tag }
@@ -47,7 +54,7 @@ class TagsController < ApplicationController
         format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
         format.json { render json: @tag, status: :created, location: @tag }
       else
-        format.html { render action: "new" }
+        format.html { render "new" }
         format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end

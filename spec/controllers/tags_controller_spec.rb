@@ -24,7 +24,10 @@ describe TagsController do
   # Tag. As you add validations to Tag, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :title => "Some title for a tag",
+      :description => "A brief description about the given title."
+    }
   end
   
   # This should return the minimal set of values that should be in the session

@@ -19,12 +19,15 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe PostsController do
-
+  include Devise::TestHelpers
   # This should return the minimal set of attributes required to create a valid
   # Post. As you add validations to Post, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :title => "New Post",
+      :description => "New Post Details"
+    }
   end
   
   # This should return the minimal set of values that should be in the session
@@ -160,5 +163,17 @@ describe PostsController do
       response.should redirect_to(posts_url)
     end
   end
+
+#  describe "access control" do
+#    it "should deny access to 'create'" do
+#      post :create
+#      response.should redirect_to(new_user_session_path)
+#    end
+#
+#    it "should deny access to 'destroy'" do
+#      delete :destroy, :id => 1
+#      response.should redirect_to(new_user_session_path)
+#    end
+#  end
 
 end

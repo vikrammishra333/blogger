@@ -1,3 +1,49 @@
 // Place all the styles related to the tags controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.inner-content {
+
+    left:5%;
+    position:relative;
+
+    #tag_stmt {
+        text-align:left;
+        color:magenta;
+        font-size:15px;
+    }
+    .field .label_for {
+        width:100px;
+        left:0%;
+        position:absolute;
+        text-align:right;
+
+        .label_for_desc {
+            vertical-align:middle;
+            top:15px;
+            position:relative;
+        }
+    }
+    .field .label_field, .actions
+    {
+        text-align:left;
+        left:14%;
+        position:relative;
+    }
+    .field_with_errors {
+        display:inline-block;
+    }
+    .field .error_span {
+        left:14%;
+        position:relative;
+        color:red;
+        display:inline-block;
+    }
+    .field .label_for_desc {
+        vertical-align:middle;
+        top:-15px;
+        position:relative;
+    }
+
+}

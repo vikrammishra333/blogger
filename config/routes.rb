@@ -15,7 +15,7 @@ Blogger::Application.routes.draw do
 
   devise_for :users
 
-  root :to => 'posts#index'
+  root :to => 'questions#index'
 
   devise_scope :user do
     match '/users/sign_out', :to => 'devise/sessions#destroy'

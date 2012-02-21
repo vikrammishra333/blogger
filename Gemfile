@@ -23,9 +23,11 @@ end
 gem 'jquery-rails'
 gem 'therubyracer'
 gem 'devise'
-
+#gem 'curb'
 group :development, :test do
   gem 'rspec-rails'
+  #gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
 end
 
 # To use ActiveModel has_secure_password

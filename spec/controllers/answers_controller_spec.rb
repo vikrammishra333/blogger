@@ -24,7 +24,9 @@ describe AnswersController do
   # Answer. As you add validations to Answer, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :answer_content => "answer to the question", :question_id => 2
+    }
   end
   
   # This should return the minimal set of values that should be in the session
