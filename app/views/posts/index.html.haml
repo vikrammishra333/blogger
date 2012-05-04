@@ -1,0 +1,13 @@
+.inner-content
+  %h2 Recent Posts
+  - if not compare_for_nil(@count) 
+    - @posts.each do |post| 
+      #post_title= post.title
+      #post_title= post.description
+  - else 
+    .notice
+      %h3 No Recents Posts Found.
+.inner-content-right
+  %h2 Recent Posts
+	   
+    

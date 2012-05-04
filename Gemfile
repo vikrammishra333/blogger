@@ -23,11 +23,15 @@ end
 gem 'jquery-rails'
 gem 'therubyracer'
 gem 'devise'
+gem 'haml'
+
 #gem 'curb'
 group :development, :test do
   gem 'rspec-rails'
-  #gem 'factory_girl_rails'
+  gem 'factory_girl_rails'
   gem 'shoulda-matchers'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'database_cleaner'
 end
 
 # To use ActiveModel has_secure_password

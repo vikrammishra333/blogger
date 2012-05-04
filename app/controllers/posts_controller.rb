@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
- #before_filter :authenticate_user!, :except => [:index, :show]
+ before_filter :authenticate_user!, :except => [:index, :show]
  
   # GET /posts
   # GET /posts.json
@@ -83,4 +83,21 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def comment
+    @post = Post.find(params[:id])
+    @comment = Comment.new(params[:comment])
+    respond_to do |format|
+      if @comment.save
+        flash[:notice] = 'Comment was successfully updated.'
+        format.html { redirect_to post_path(@blogger, @post) }
+        format.json  { head :no_content }
+      else
+        flash[:notice] = 'Error saving comment.'
+        format.html { redirect_to post_path(@blogger, @post) }
+        format.json  {render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 end

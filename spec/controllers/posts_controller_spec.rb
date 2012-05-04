@@ -24,23 +24,31 @@ describe PostsController do
   # Post. As you add validations to Post, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {
-      :title => "New Post",
-      :description => "New Post Details"
-    }
+   FactoryGirl.attributes_for(:post)
   end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # PostsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {
+     
+    }
+  end
+
+  before (:each) do
+   @user = FactoryGirl.create(:user)
+   sign_in @user
+ end
+
+  it "should have a current user" do
+    subject.current_user.should_not be_nil
   end
 
   describe "GET index" do
     it "assigns all posts as @posts" do
       post = Post.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:posts).should eq([post])
     end
   end
@@ -48,14 +56,14 @@ describe PostsController do
   describe "GET show" do
     it "assigns the requested post as @post" do
       post = Post.create! valid_attributes
-      get :show, {:id => post.to_param}, valid_session
+      get :show, {:id => post.to_param}
       assigns(:post).should eq(post)
     end
   end
 
   describe "GET new" do
     it "assigns a new post as @post" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:post).should be_a_new(Post)
     end
   end
@@ -63,7 +71,7 @@ describe PostsController do
   describe "GET edit" do
     it "assigns the requested post as @post" do
       post = Post.create! valid_attributes
-      get :edit, {:id => post.to_param}, valid_session
+      get :edit, {:id => post.to_param}
       assigns(:post).should eq(post)
     end
   end
@@ -72,18 +80,18 @@ describe PostsController do
     describe "with valid params" do
       it "creates a new Post" do
         expect {
-          post :create, {:post => valid_attributes}, valid_session
+          post :create, {:post => valid_attributes}
         }.to change(Post, :count).by(1)
       end
 
       it "assigns a newly created post as @post" do
-        post :create, {:post => valid_attributes}, valid_session
+        post :create, {:post => valid_attributes}
         assigns(:post).should be_a(Post)
         assigns(:post).should be_persisted
       end
 
       it "redirects to the created post" do
-        post :create, {:post => valid_attributes}, valid_session
+        post :create, {:post => valid_attributes}
         response.should redirect_to(Post.last)
       end
     end
@@ -92,14 +100,14 @@ describe PostsController do
       it "assigns a newly created but unsaved post as @post" do
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        post :create, {:post => {}}, valid_session
+        post :create, {:post => {}}
         assigns(:post).should be_a_new(Post)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        post :create, {:post => {}}, valid_session
+        post :create, {:post => {}}
         response.should render_template("new")
       end
     end
@@ -114,18 +122,18 @@ describe PostsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Post.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => post.to_param, :post => {'these' => 'params'}}, valid_session
+        put :update, {:id => post.to_param, :post => {'these' => 'params'}}
       end
 
       it "assigns the requested post as @post" do
         post = Post.create! valid_attributes
-        put :update, {:id => post.to_param, :post => valid_attributes}, valid_session
+        put :update, {:id => post.to_param, :post => valid_attributes}
         assigns(:post).should eq(post)
       end
 
       it "redirects to the post" do
         post = Post.create! valid_attributes
-        put :update, {:id => post.to_param, :post => valid_attributes}, valid_session
+        put :update, {:id => post.to_param, :post => valid_attributes}
         response.should redirect_to(post)
       end
     end
@@ -135,7 +143,7 @@ describe PostsController do
         post = Post.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        put :update, {:id => post.to_param, :post => {}}, valid_session
+        put :update, {:id => post.to_param, :post => {}}
         assigns(:post).should eq(post)
       end
 
@@ -143,7 +151,7 @@ describe PostsController do
         post = Post.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        put :update, {:id => post.to_param, :post => {}}, valid_session
+        put :update, {:id => post.to_param, :post => {}}
         response.should render_template("edit")
       end
     end
@@ -153,27 +161,62 @@ describe PostsController do
     it "destroys the requested post" do
       post = Post.create! valid_attributes
       expect {
-        delete :destroy, {:id => post.to_param}, valid_session
+        delete :destroy, {:id => post.to_param}
       }.to change(Post, :count).by(-1)
     end
 
     it "redirects to the posts list" do
       post = Post.create! valid_attributes
-      delete :destroy, {:id => post.to_param}, valid_session
+      delete :destroy, {:id => post.to_param}
       response.should redirect_to(posts_url)
     end
   end
 
-#  describe "access control" do
-#    it "should deny access to 'create'" do
-#      post :create
-#      response.should redirect_to(new_user_session_path)
-#    end
-#
-#    it "should deny access to 'destroy'" do
-#      delete :destroy, :id => 1
-#      response.should redirect_to(new_user_session_path)
-#    end
-#  end
+  describe "access control, If not signed in" do
+    before(:each) do
+      sign_out @user
+    end
+    after(:each) do
+      response.should redirect_to(new_user_session_path)
+    end
+
+    it "should deny access to 'new post'" do
+      get :new
+    end
+
+    it "should deny access to 'create'" do
+      post :create
+    end
+    
+    it "should deny access to 'edit post'" do
+      get :edit
+    end
+
+    it "should deny access to 'update'" do
+      put :update
+    end
+
+    it "should deny access to 'destroy'" do
+      delete :destroy, :id => 1
+      
+    end
+  end
+
+   describe "POST comment" do
+    before do
+      @post = mock_model(Post)
+      Post.should_receive(:find).and_return(@post)
+      @comment = mock_model(Comment)
+      Comment.should_receive(:new).with({"content" => 'comment body'}).and_return(@comment)
+      @blogger = mock_model(User)
+      @controller.instance_variable_set(:@blogger, @blogger)
+    end
+    it "should add comments to the post" do
+       @comment.should_receive(:save).and_return(true)
+       post(:comment, :post_id => @post.id, :comment => {:content => 'comment body'})
+       flash[:notice].should match(/success/i)
+       response.should redirect_to(post_path(@blogger, @post))
+   end
+  end
 
 end

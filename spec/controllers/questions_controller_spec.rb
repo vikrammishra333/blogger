@@ -19,15 +19,15 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe QuestionsController do
+  def mock_question(stubs={})
+    @mock_question ||= mock_model(Question, stubs).as_null_object
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Question. As you add validations to Question, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {
-      :title => "some title",
-      :description => "some description"
-    }
+   Factory.attributes_for(:question)
   end
   
   # This should return the minimal set of values that should be in the session
@@ -39,32 +39,33 @@ describe QuestionsController do
 
   describe "GET index" do
     it "assigns all questions as @questions" do
-      question = Question.create! valid_attributes
+      Question.stub(:all) { [mock_question]}
       get :index, {}, valid_session
-      assigns(:questions).should eq([question])
+      assigns(:questions).should eq([mock_question])
     end
   end
 
   describe "GET show" do
     it "assigns the requested question as @question" do
-      question = Question.create! valid_attributes
-      get :show, {:id => question.to_param}, valid_session
-      assigns(:question).should eq(question)
+      Question.stub(:find).with("25") { [mock_question]}
+      get :show, :id => 25 
+      assigns(:question).should eq([mock_question])
     end
   end
 
   describe "GET new" do
     it "assigns a new question as @question" do
+      Question.stub(:new) { mock_question }
       get :new, {}, valid_session
-      assigns(:question).should be_a_new(Question)
+      assigns(:question).should be(mock_question)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested question as @question" do
-      question = Question.create! valid_attributes
-      get :edit, {:id => question.to_param}, valid_session
-      assigns(:question).should eq(question)
+      Question.stub(:find).with("25") { mock_question }
+      get :edit, :id => "25"
+      assigns(:question).should be(mock_question)
     end
   end
 
@@ -77,14 +78,15 @@ describe QuestionsController do
       end
 
       it "assigns a newly created question as @question" do
-        post :create, {:question => valid_attributes}, valid_session
-        assigns(:question).should be_a(Question)
-        assigns(:question).should be_persisted
+        Question.stub(:new).with({'these' => 'params'}) { mock_question(:save => true) }
+        post :create, :question => {'these' => 'params'}
+        assigns(:question).should be(mock_question)
       end
 
       it "redirects to the created question" do
-        post :create, {:question => valid_attributes}, valid_session
-        response.should redirect_to(Question.last)
+        Question.stub(:new){ mock_question(:save => true) }
+        post :create, :question => {}
+        assigns(:question).should redirect_to(question_url(mock_question))
       end
     end
 

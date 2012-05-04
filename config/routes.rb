@@ -1,6 +1,7 @@
 Blogger::Application.routes.draw do
   
-  
+   #match 'juvia/api/:action(.:format)', :to => 'juvia/api'
+   match 'juvia/api/:action(.:format)', :to => 'juvia/api'
  # Mercury::Engine.routes
 
   resources :guests

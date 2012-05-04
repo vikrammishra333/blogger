@@ -1,3 +1,17 @@
+
+<%= javascript_include_tag 'jquery.wysiwyg.js'%>
+<%= javascript_include_tag 'controls/wysiwyg.image.js'%>
+<%= javascript_include_tag 'controls/wysiwyg.table.js'%>
+<script type="text/javascript">
+$(function() {
+    $('#wysiwyg').wysiwyg({
+      autoGrow:true
+    });
+});
+
+</script>
+
+
 <h1>New post</h1>
 
 <%= render 'form' %>

@@ -1,0 +1,337 @@
+
+tags/new
+  renders new tag form
+
+tags/index
+  renders a list of tags
+
+tags/show
+  renders attributes in <p>
+
+tags/edit
+  renders the edit tag form
+
+answers/new
+  renders new answer form
+
+answers/index
+  renders a list of answers
+
+answers/show
+  renders attributes in <p>
+
+answers/edit
+  renders the edit answer form
+
+guests/new
+  renders new guest form
+
+guests/index
+  renders a list of guests
+
+guests/show
+  renders attributes in <p>
+
+guests/edit
+  renders the edit guest form
+
+questions/new
+  renders new question form
+
+questions/index
+  renders a list of questions
+
+questions/show
+  renders attributes in <p>
+
+questions/edit
+  renders the edit question form
+
+posts/new.html.erb
+  renders the form partial
+
+posts/index
+  renders a list of recent posts
+
+posts/show.html.erb
+  displays the post title with description
+  displays the edit link
+  displays the back link to list the post
+
+posts/edit
+  renders the edit post form
+
+Posts
+  GET /posts
+    displays posts
+    supports js
+
+Questions
+  GET /questions
+    works! (now write some real specs)
+
+Answers
+  GET /answers
+    works! (now write some real specs)
+
+Guests
+  GET /guests
+    works! (now write some real specs)
+
+Tags
+  GET /tags
+    works! (now write some real specs)
+
+Tag
+  should have and belong to many questions
+  should create a new instance given a valid attribute
+  should be invalid without a title
+  should require a valid description
+  should have an error on title
+  should have an error on description
+  should have one or more questions
+
+Post
+  should create a new instance given a valid attribute
+  should be invalid without a title
+  should require a valid description
+  should have an error on blank title
+  should have an error on blank description
+  should belong to users
+
+User
+  relationship
+    should have many posts
+
+Answer
+  should belong to questions
+  validations
+    should create a new instance given a valid attribute
+    should be invalid without a question id
+    should require nonblank content
+
+Question
+  should create a new instance given a valid attribute
+  should be invalid without a title
+  should be invalid without a description
+  should have an error on title
+  should have an error on description
+  should have one or more tags
+  answer associations
+    should respond to answer attribute
+    should destroy associated answers
+    should have many answers
+    should have and belong to many tags
+
+QuestionsTags
+  should have a valid question
+
+TagsController
+  GET index
+    assigns all tags as @tags
+  GET show
+    assigns the requested tag as @tag
+  GET new
+    assigns a new tag as @tag
+  GET edit
+    assigns the requested tag as @tag
+  POST create
+    with valid params
+      creates a new Tag
+      assigns a newly created tag as @tag
+      redirects to the created tag
+    with invalid params
+      assigns a newly created but unsaved tag as @tag
+      re-renders the 'new' template
+  PUT update
+    with valid params
+      updates the requested tag
+      assigns the requested tag as @tag
+      redirects to the tag
+    with invalid params
+      assigns the tag as @tag
+      re-renders the 'edit' template
+  DELETE destroy
+    destroys the requested tag
+    redirects to the tags list
+
+AnswersController
+  GET index
+    assigns all answers as @answers
+  GET show
+    assigns the requested answer as @answer
+  GET new
+    assigns a new answer as @answer
+  GET edit
+    assigns the requested answer as @answer
+  POST create
+    with valid params
+      creates a new Answer
+      assigns a newly created answer as @answer
+      redirects to the created answer
+    with invalid params
+      assigns a newly created but unsaved answer as @answer
+      re-renders the 'new' template
+  PUT update
+    with valid params
+      updates the requested answer
+      assigns the requested answer as @answer
+      redirects to the answer
+    with invalid params
+      assigns the answer as @answer
+      re-renders the 'edit' template
+  DELETE destroy
+    destroys the requested answer
+    redirects to the answers list
+
+PostsController
+  GET index
+    assigns all posts as @posts
+  GET show
+    assigns the requested post as @post
+  GET new
+    assigns a new post as @post
+  GET edit
+    assigns the requested post as @post
+  POST create
+    with valid params
+      creates a new Post
+      assigns a newly created post as @post
+      redirects to the created post
+    with invalid params
+      assigns a newly created but unsaved post as @post
+      re-renders the 'new' template
+  PUT update
+    with valid params
+      updates the requested post
+      assigns the requested post as @post
+      redirects to the post
+    with invalid params
+      assigns the post as @post
+      re-renders the 'edit' template
+  DELETE destroy
+    destroys the requested post
+    redirects to the posts list
+  access control, If not signed in
+    should deny access to 'new post'
+    should deny access to 'create'
+    should deny access to 'edit post'
+    should deny access to 'update'
+    should deny access to 'destroy'
+  POST comment
+    should add comments to the post
+
+GuestsController
+  GET index
+    assigns all people as @people
+  GET show
+    assigns the requested person as @person
+  GET new
+    assigns a new person as @person
+  GET edit
+    assigns the requested person as @person
+  POST create
+    with valid params
+      assigns a newly created person as @person
+      redirects to the created person
+    with invalid params
+      assigns a newly created but unsaved person as @person
+      re-renders the 'new' template
+  PUT update
+    with valid params
+      updates the requested person
+      assigns the requested person as @person
+      redirects to the person
+    with invalid params
+      assigns the person as @person
+      re-renders the 'edit' template
+  DELETE destroy
+    destroys the requested person
+    redirects to the people list
+
+QuestionsController
+  GET index
+    assigns all questions as @questions
+  GET show
+    assigns the requested question as @question
+  GET new
+    assigns a new question as @question
+  GET edit
+    assigns the requested question as @question
+  POST create
+    with valid params
+      creates a new Question
+      assigns a newly created question as @question
+      redirects to the created question
+    with invalid params
+      assigns a newly created but unsaved question as @question
+      re-renders the 'new' template
+  PUT update
+    with valid params
+      updates the requested question
+      assigns the requested question as @question
+      redirects to the question
+    with invalid params
+      assigns the question as @question
+      re-renders the 'edit' template
+  DELETE destroy
+    destroys the requested question
+    redirects to the questions list
+
+AnswersController
+  routing
+    routes to #index
+    routes to #new
+    routes to #show
+    routes to #edit
+    routes to #create
+    routes to #update
+    routes to #destroy
+
+QuestionsController
+  routing
+    routes to #index
+    routes to #new
+    routes to #show
+    routes to #edit
+    routes to #create
+    routes to #update
+    routes to #destroy
+
+GuestsController
+  routing
+    routes to #index
+    routes to #new
+    routes to #show
+    routes to #edit
+    routes to #create
+    routes to #update
+    routes to #destroy
+
+TagsController
+  routing
+    routes to #index
+    routes to #new
+    routes to #show
+    routes to #edit
+    routes to #create
+    routes to #update
+    routes to #destroy
+
+PostsController
+  routing
+    routes to #index
+    routes to #new
+    routes to #show
+    routes to #edit
+    routes to #create
+    routes to #update
+    routes to #destroy
+
+ApplicationHelper
+  compare_for_nil
+    returns true
+    returns false
+
+Finished in 38.11 seconds
+179 examples, 0 failures

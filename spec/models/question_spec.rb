@@ -4,10 +4,12 @@ describe Question do
 
   it "should create a new instance given a valid attribute" do
     Question.create!(:title => 'Question title', :description => "question description")
+    #Factory.create(:question)
   end
 
   it "should be invalid without a title" do
     question = Question.new(:title => "")
+    #question = FactoryGirl.build(:question, :title => "")
     question.should_not be_valid
   end
 
@@ -37,7 +39,7 @@ describe Question do
     @question.tags.first.should == @tag
   end
 
-  describe "answer associations" do
+  context "answer associations" do
 
     before(:each) do
       @question = Question.create(:title => "title", :description => "description")
@@ -45,10 +47,10 @@ describe Question do
       @ans2 = Answer.create(:question_id => @question.id)
     end
 
-    it "should have an answer attribute" do
+    it "should respond to answer attribute" do
       @question.should respond_to(:answers)
     end
-    
+
     it "should destroy associated answers" do
       @question.destroy
       [@ans1, @ans2].each do |answer|
@@ -61,5 +63,5 @@ describe Question do
     it { should have_and_belong_to_many(:tags)}
 
   end
-  
+
 end

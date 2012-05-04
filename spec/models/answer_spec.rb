@@ -17,7 +17,7 @@ describe Answer do
       Answer.new(:answer_content => "answer to the question", :question_id => "").should_not be_valid
     end
 
-   it "should require nonblank content" do
+   it "should require non-blank content" do
       Answer.new(:question_id => @question).should_not be_valid
     end
 
